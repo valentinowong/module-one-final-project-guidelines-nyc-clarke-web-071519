@@ -19,4 +19,4 @@ result = prompt.collect do
   end
 
 binding.pry
-puts "0"
+puts "hi"
