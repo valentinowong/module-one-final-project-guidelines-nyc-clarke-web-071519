@@ -22,14 +22,18 @@ end
 
 #Takes in a datetime object and returns it formatted for display
 def display_date_time(datetime)
-    datetime.strftime("%Y/%m/%d - %I:%M %p")
+    datetime.strftime("%m/%d/%Y - %I:%M %p")
 end
 
 # **********************************
 
 def homescreen(current_user)
-
+    puts `clear`
+    puts "*************** Your Drinks Today *******************"
+    puts ""
     current_user.show_todays_drinks
+    puts ""
+    puts "*****************************************************"
 
     prompt = TTY::Prompt.new
 

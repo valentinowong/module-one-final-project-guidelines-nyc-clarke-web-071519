@@ -32,12 +32,13 @@ class User < ActiveRecord::Base
         end
     end
 
+    # Takes in a date and displays the drinks a user had on that drinking date
     def display_drinks_on_date(date)
         users_drinks_on_date = drinks_on_date(date)
         display_drinks(users_drinks_on_date)
     end
 
-
+    # Shows the drinks a user had on the current drinking date
     def show_todays_drinks
         display_drinks_on_date(drinking_day(Time.now))
     end
