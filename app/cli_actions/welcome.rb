@@ -33,10 +33,13 @@ end
         @prompt.collect do
             key(:first_name).ask('What is your first name? (required)', required: true)
             key(:last_name).ask('What is your last name?')
-            key(:email).ask('What is your email? (required)', required:  true)
-            key(:weight).ask('What is your weight?')
-            key(:birthdate).ask('What is your birthdate? (YYYY/MM/DD)')
-            key(:gender).ask("What is your gender")
+            key(:email).ask('What is your email? (required)', required: true,) { |q| q.validate :email, 'Please enter a valid email address.' }
+            key(:weight).ask('What is your weight? (lbs)')
+            key(:birthdate).ask('What is your birthdate? (YYYY-MM-DD)') do |q| 
+                q.validate(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
+                q.messages[:valid?] = 'Please enter a valid date.'
+            end
+            key(:gender).select("What is your gender?",['male','female','other'])
             key(:password).ask("Create a password. (required)", required: true)
         end
     end
@@ -51,9 +54,8 @@ end
 
         #a prompt that asks a user to enter an email address, uses that user input in the next method
     def log_in_prompt
-        user_email = @prompt.ask('What is your email?') do |q|
-            q.validate(/\A\w+@\w+\.\w+\Z/, 'Invalid email address')
-        end
+        user_email = @prompt.ask('What is your email?') 
+            # do |q| q.validate(/\A\w+@\w+\Z/, 'Invalid email address')
         log_in_prompt_result(user_email)
     end
     
