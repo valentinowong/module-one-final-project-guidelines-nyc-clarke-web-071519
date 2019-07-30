@@ -1,11 +1,28 @@
 # Helper Methods
 # **********************************
+
+# Takes in a date object and returns the starting datetime of that drinking date
 def drinking_day_start(date)
-    DateTime.parse(date.strftime("%Y/%m/%d")+"T12:00:00-04:00")
+    date.to_time + 28800
 end
 
+# Takes in a date object and returns the ending datetime of that drinking date
 def drinking_day_end(date)
-    DateTime.parse((date+1).strftime("%Y/%m/%d")+"T11:59:59-04:00")
+    date.to_time + 115199
+end
+
+# Takes in a datetime object and returns the drinking date
+def drinking_day(datetime)
+    if datetime.hour >= 8
+        Date.parse(datetime.strftime("%Y/%m/%d %I:%M %p"))
+    else
+        Date.parse(datetime.strftime("%Y/%m/%d %I:%M %p")) - 1
+    end
+end
+
+#Takes in a datetime object and returns it formatted for display
+def display_date_time(datetime)
+    datetime.strftime("%Y/%m/%d - %I:%M %p")
 end
 
 # **********************************
