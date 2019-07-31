@@ -49,7 +49,7 @@ def past_history(current_user)
     inputed_date = past_history_date_prompt(current_user)
     display_past_history(current_user, inputed_date)
     next_step = past_history_next_step_prompt
-    if next_step = "See another date"
+    if next_step == "See another date"
         until next_step != "See another date"
             inputed_date = past_history_date_prompt(current_user)
             display_past_history(current_user, inputed_date)

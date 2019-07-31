@@ -6,28 +6,24 @@ end
 
 #-----------------welcome message prompt--------------#
 
-
-        #prompt to ask user if they want to sign in or create account..string that is returned is used in "welcome_redirect"
-def welcome_message_prompt
-    welcome_message_input = @prompt.select("Please Sign In or Create New Account!", ["Sign In", "Create New Account"])
-    welcome_redirect(welcome_message_input)
-end
-        #takes user input and either redirects to our log in method or our create new user method
-def welcome_redirect(welcome_input)
-    if welcome_input == "Sign In"
-        log_in_prompt
-    else 
-        create_new_user
+    #prompt to ask user if they want to sign in or create account..string that is returned is used in "welcome_redirect"
+    def welcome_message_prompt
+        welcome_message_input = @prompt.select("Please Sign In or Create New Account!", ["Sign In", "Create New Account"])
+        welcome_redirect(welcome_message_input)
     end
-end
     
-
-
-
-
+    #takes user input and either redirects to our log in method or our create new user method
+    def welcome_redirect(welcome_input)
+        if welcome_input == "Sign In"
+            log_in_prompt
+        else 
+            create_new_user
+        end
+    end
+    
 #--------------SIGN-UP---------------------#
 
-        #displays a prompt that returns a hash of user input
+    #displays a prompt that returns a hash of user input
     def sign_up_prompt
         puts "Tell us a little about yourself!"
         @prompt.collect do
@@ -44,23 +40,22 @@ end
         end
     end
 
-        #uses the user input hash from "sign_up_prompt" to create a new user in our database
-   def create_new_user  
+    #uses the user input hash from "sign_up_prompt" to create a new user in our database
+    def create_new_user  
         User.create(sign_up_prompt)
-     end
+    end
 
-#-----------------SIGN-IN-------------
+#-----------------SIGN-IN-------------#
 
-
-        #a prompt that asks a user to enter an email address, uses that user input in the next method
+    #a prompt that asks a user to enter an email address, uses that user input in the next method
     def log_in_prompt
         user_email = @prompt.ask('What is your email?') 
             # do |q| q.validate(/\A\w+@\w+\Z/, 'Invalid email address')
         log_in_prompt_result(user_email)
     end
     
-        #an email validater that takes in the user input from previous method and checks if it matches a User in our database. If it does match we redirect to password.
-        #if the email does not match one in our database a prompt is called that asks a user to try again or create new user.
+    #an email validater that takes in the user input from previous method and checks if it matches a User in our database. If it does match we redirect to password.
+    #if the email does not match one in our database a prompt is called that asks a user to try again or create new user.
     def log_in_prompt_result(user_email)
         if User.find_by(email: user_email)
             user = User.find_by(email: user_email)
@@ -72,7 +67,7 @@ end
     end
 
 
-        #either redirects to trying the email again or to create user based of the user input from "user_choice" prompt
+    #either redirects to trying the email again or to create user based of the user input from "user_choice" prompt
     def if_no_email(user_choice)
         if user_choice == "Try again"
             email_prompt
@@ -81,8 +76,7 @@ end
         end
     end
 
-
-        #a prompt asking for a user to input their password. Uses that input in next method.
+    #a prompt asking for a user to input their password. Uses that input in next method.
     def password_prompt(user)
         user_input = @prompt.mask('What is your password?')
         password_validator(user_input,user)
@@ -105,8 +99,6 @@ end
             create_new_user
         end
     end
-
-
 
     #------------------email_prompt    run this to log in!------------------
     #------------------create_new_user    run this to sign up!------------------
