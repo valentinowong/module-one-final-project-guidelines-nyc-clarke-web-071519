@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
     #  Takes in a date and returns an array of the userdrinks that this user had on that drinking date
     def drinks_on_date(date)
-        drinks_from_date = user_drinks.select do |user_drink|
+        drinks_from_date = self.user_drinks.select do |user_drink|
             user_drink.datetime >= drinking_day_start(date) &&
             user_drink.datetime < drinking_day_end(date)
         end

@@ -54,6 +54,6 @@ def past_history(current_user)
     elsif next_step == "Return to Today's Drinks"
         homescreen(current_user)
     elsif next_step == "Log a drink for this date"
-        
+        log_drink_on_any_date(current_user, inputed_date)
     end
 end

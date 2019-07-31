@@ -55,7 +55,7 @@ def homescreen(current_user)
         past_history(current_user)
     elsif next_step == 'Logout'
         current_user = welcome
-    else
-
+    elsif next_step == 'Log a drink'
+        log_a_drink_today_prompt(current_user)
     end
 end
