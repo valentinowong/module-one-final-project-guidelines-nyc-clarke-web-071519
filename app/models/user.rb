@@ -43,8 +43,13 @@ class User < ActiveRecord::Base
         display_drinks_on_date(drinking_day(Time.now))
     end
 
-    def last_10_unique_drinks
-        last_drinks = []
+    # Returns an array of all the drinking dates that a specific user has had a drink
+    def drinking_days
+        user_drinks.map {|userdrink| drinking_day(userdrink.datetime)}.uniq
+    end
+
+    def last_5_drinking_days
+        drinking_days.last(5)
     end
 
 end

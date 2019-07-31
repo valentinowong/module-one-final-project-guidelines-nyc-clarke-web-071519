@@ -27,22 +27,29 @@ end
 
 # **********************************
 
-def homescreen(current_user)
+def display_homescreen(current_user)
     puts `clear`
     puts "*************** Your Drinks Today *******************"
     puts ""
     current_user.show_todays_drinks
     puts ""
     puts "*****************************************************"
+end
 
+def homescreen_next_step_prompt
     prompt = TTY::Prompt.new
 
     result = prompt.select('What would you like to do?') do |menu|
-        menu.choice 'Log a Drink', 1
-        menu.choice 'See Past History', 2
-        menu.choice 'Logout', 3
+        menu.choice 'Log a drink', 'Log a drink'
+        menu.choice 'See past history', 'See past history'
+        menu.choice 'Logout', 'Logout'
     end
 
     result
+end
 
+def homescreen(current_user)
+    display_homescreen(current_user)
+    next_step = homescreen_next_step_prompt
+    next_step
 end
