@@ -6,3 +6,6 @@ gem "sqlite3"
 gem "pry"
 gem "tty-prompt"
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+gem 'colorize'
+gem 'rest-client'
+gem 'json'

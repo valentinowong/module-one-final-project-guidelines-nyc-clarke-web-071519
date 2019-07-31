@@ -24,11 +24,11 @@ end
 # Displays the drinks a user had on a specific drinking date 
 def display_past_history(current_user, date)
     puts `clear`
-    puts "******** Your Drinks on #{date.strftime("%A, %d %B %Y")} ********"
+    puts "******** ".blue + "Your Drinks on #{date.strftime("%A, %d %B %Y")}" + " ********".blue
     puts ""
     current_user.display_drinks_on_date(date)
     puts ""
-    puts "*****************************************************"
+    puts "*****************************************************".blue
 end
 
 def past_history_next_step_prompt
@@ -50,13 +50,10 @@ def past_history(current_user)
     display_past_history(current_user, inputed_date)
     next_step = past_history_next_step_prompt
     if next_step == "See another date"
-        until next_step != "See another date"
-            inputed_date = past_history_date_prompt(current_user)
-            display_past_history(current_user, inputed_date)
-            next_step = past_history_next_step_prompt
-        end
-        next_step
-    else 
-        next_step
+        past_history(current_user)
+    elsif next_step == "Return to Today's Drinks"
+        homescreen(current_user)
+    elsif next_step == "Log a drink for this date"
+        
     end
 end

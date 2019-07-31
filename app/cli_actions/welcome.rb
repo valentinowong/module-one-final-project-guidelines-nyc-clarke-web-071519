@@ -1,5 +1,7 @@
 def welcome
-    puts "Welcome to Drink Logger 5000!"
+    puts `clear`
+    puts "Welcome to Drink Logger 5000!".blue
+    puts ""
     welcome_message_prompt
 end
 
@@ -8,16 +10,24 @@ end
 
     #prompt to ask user if they want to sign in or create account..string that is returned is used in "welcome_redirect"
     def welcome_message_prompt
-        welcome_message_input = @prompt.select("Please Sign In or Create New Account!", ["Sign In", "Create New Account"])
-        welcome_redirect(welcome_message_input)
+        welcome_message_input = @prompt.select("Please Sign In or Create New Account!", ["Sign In", "Create New Account","Close App"])
+        current_user = welcome_redirect(welcome_message_input)
     end
     
     #takes user input and either redirects to our log in method or our create new user method
     def welcome_redirect(welcome_input)
         if welcome_input == "Sign In"
-            log_in_prompt
-        else 
-            create_new_user
+            current_user = log_in_prompt
+            homescreen(current_user)
+        elsif welcome_input == "Create New Account"
+            current_user = create_new_user
+            homescreen(current_user)
+        elsif welcome_input == "Close App"
+            puts `clear`
+            puts '     "24 hours in a day. 24 beers in a case. Coincidence? I think not." - H.L. Mencken'.yellow
+            puts ""
+            puts "     🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺"
+            puts ""
         end
     end
     
@@ -70,8 +80,8 @@ end
     #either redirects to trying the email again or to create user based of the user input from "user_choice" prompt
     def if_no_email(user_choice)
         if user_choice == "Try again"
-            email_prompt
-        else
+            log_in_prompt
+        elsif user_choice == "Sign up"
             create_new_user
         end
     end
@@ -100,7 +110,5 @@ end
         end
     end
 
-    #------------------email_prompt    run this to log in!------------------
+    #------------------log_in_prompt    run this to log in!------------------
     #------------------create_new_user    run this to sign up!------------------
-
-

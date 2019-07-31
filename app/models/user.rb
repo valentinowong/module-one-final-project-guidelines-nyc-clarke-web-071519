@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
             user_drink_datetime_as_local_time = user_drink.datetime.getlocal
             # Takes a datetime and 
             user_drink_datetime_display_format = display_date_time(user_drink_datetime_as_local_time)
-            puts "  #{user_drink_datetime_display_format} - #{user_drink.amount} oz. #{Drink.find(user_drink.drink_id).name}"
+            puts "  #{user_drink_datetime_display_format} - #{user_drink.amount} oz. #{Drink.find(user_drink.drink_id).name}".yellow
         end
     end
 

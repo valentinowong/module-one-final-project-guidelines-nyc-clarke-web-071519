@@ -29,11 +29,11 @@ end
 
 def display_homescreen(current_user)
     puts `clear`
-    puts "*************** Your Drinks Today *******************"
+    puts "*************** ".blue + "Your Drinks Today" + " *******************".blue
     puts ""
     current_user.show_todays_drinks
     puts ""
-    puts "*****************************************************"
+    puts "*****************************************************".blue
 end
 
 def homescreen_next_step_prompt
@@ -51,5 +51,11 @@ end
 def homescreen(current_user)
     display_homescreen(current_user)
     next_step = homescreen_next_step_prompt
-    next_step
+    if next_step == 'See past history'
+        past_history(current_user)
+    elsif next_step == 'Logout'
+        current_user = welcome
+    else
+
+    end
 end
