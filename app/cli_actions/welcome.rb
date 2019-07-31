@@ -81,7 +81,11 @@ end
     def if_no_email(user_choice)
         if user_choice == "Try again"
             log_in_prompt
+<<<<<<< HEAD
         elsif user_choice == "Sign up"
+=======
+        else
+>>>>>>> cea326246b76cc6341788a0929665f28ab854028
             create_new_user
         end
     end

@@ -61,3 +61,6 @@ def display_drink_info(drink_info_hash)
     puts "#{drink_info_hash["strInstructions"].chomp}".yellow
 end
 
+
+# Max drinks returned = 110
+# Display 20s
