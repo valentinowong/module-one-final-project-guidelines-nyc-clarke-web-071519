@@ -70,7 +70,7 @@ end
     #either redirects to trying the email again or to create user based of the user input from "user_choice" prompt
     def if_no_email(user_choice)
         if user_choice == "Try again"
-            email_prompt
+            log_in_prompt
         else
             create_new_user
         end

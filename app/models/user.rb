@@ -43,16 +43,18 @@ class User < ActiveRecord::Base
         display_drinks_on_date(drinking_day(Time.now))
     end
 
-    #array of a users 5 most recent drinks
+    # array of a users 5 most recent drinks
     def five_most_recent_drinks
         array = []
-        sorted_user_drinks = user_drinks.sort_by {|userdrink| userdrink.datetime}
+        sorted_user_drinks = self.user_drinks.sort_by {|userdrink| userdrink.datetime}.reverse
         sorted_user_drinks.each do |userdrink|
-            if array.length < 5 && !array.include?(userdrink) #.id && userdrink.amount)) - If a userdrink that has this userdrink's drink_id AND amount is not already in the array, add this userdrink to the array
-                array << userdrink
+            if array.length < 5 
+                unless array.find {|recent_drink| recent_drink.drink_id == userdrink.drink_id && recent_drink.amount == userdrink.amount}
+                    array << userdrink
+                end
             end
-            array
         end
+        array
     end
 
     # Returns an array of all the drinking dates that a specific user has had a drink
