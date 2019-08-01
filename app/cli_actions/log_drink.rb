@@ -121,12 +121,25 @@ def log_drink_on_any_date(current_user, date)
   past_history(current_user.reload)
 end
 
-def log_recent_drink_any_date(current_user, userdrink, date)   #ask for time
+def log_recent_drink_any_date(current_user, userdrink, date) 
+    #ask for time
+    prompt = TTY::Prompt.new
+    recent_time = prompt.ask('What time did you have this drink? (HH:MM am/pm)') do |q|
+      q.validate(/((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))/)
+        q.messages[:valid?] = 'Please enter a valid time.'
+    end
   new_userdrink_with_recent_drink = UserDrink.create(
-    datetime: date,
+    datetime: Time.parse("#{date.strftime("%Y/%m/%d")} + #{recent_time}"),
     amount: userdrink.amount,
     drink_id: userdrink.drink_id,
-    user_id: current_user.id
+    user_id: current_user.id 
   )  
-  past_history(current_user.reload)
+  if new_userdrink_with_recent_drink[:datetime].getlocal.hour <= 8
+    past_history_display_and_next_steps(current_user.reload, date-1)
+  elsif new_userdrink_with_recent_drink[:datetime].getlocal.hour >= 8
+    past_history_display_and_next_steps(current_user.reload, date)
+  end
 end
+
+
+
