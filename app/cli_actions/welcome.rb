@@ -71,15 +71,11 @@ end
     #an email validater that takes in the user input from previous method and checks if it matches a User in our database. If it does match we redirect to password.
     #if the email does not match one in our database a prompt is called that asks a user to try again or create new user.
     def log_in_prompt_result(user_email)
-        prompt = TTY::Prompt.new
         if User.find_by(email: user_email)
             user = User.find_by(email: user_email)
             password_prompt(user)
         else
-<<<<<<< HEAD
-=======
             prompt = TTY::Prompt.new
->>>>>>> make_drink2
             user_choice = prompt.select("Sorry! Email does not exist", ["Try again", "Sign up"])
             if_no_email(user_choice)
         end
