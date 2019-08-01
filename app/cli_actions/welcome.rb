@@ -11,7 +11,10 @@ end
     #prompt to ask user if they want to sign in or create account..string that is returned is used in "welcome_redirect"
     def welcome_message_prompt
         prompt = TTY::Prompt.new
+<<<<<<< HEAD
 
+=======
+>>>>>>> make_drink2
         welcome_message_input = prompt.select("Please Sign In or Create New Account!", ["Sign In", "Create New Account","Close App"])
         current_user = welcome_redirect(welcome_message_input)
     end
@@ -40,6 +43,10 @@ end
         prompt = TTY::Prompt.new
 
         puts "Tell us a little about yourself!"
+<<<<<<< HEAD
+=======
+        prompt = TTY::Prompt.new
+>>>>>>> make_drink2
         prompt.collect do
             key(:first_name).ask('What is your first name? (required)', required: true)
             key(:last_name).ask('What is your last name?')
@@ -77,6 +84,10 @@ end
             user = User.find_by(email: user_email)
             password_prompt(user)
         else
+<<<<<<< HEAD
+=======
+            prompt = TTY::Prompt.new
+>>>>>>> make_drink2
             user_choice = prompt.select("Sorry! Email does not exist", ["Try again", "Sign up"])
             if_no_email(user_choice)
         end
@@ -105,6 +116,10 @@ end
         if user.password == password_attempt
             current_user = User.find_by(email: user.email)
         else
+<<<<<<< HEAD
+=======
+            prompt = TTY::Prompt.new
+>>>>>>> make_drink2
             incorrect_password_user_input = prompt.select("Sorry! wrong password! Would you like to try again?", ["Try again", "Sign up"])
             incorrect_password(incorrect_password_user_input,user)
         end

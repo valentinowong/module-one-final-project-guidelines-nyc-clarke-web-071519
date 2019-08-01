@@ -40,9 +40,10 @@ def homescreen_next_step_prompt
     prompt = TTY::Prompt.new
 
     result = prompt.select('What would you like to do?') do |menu|
-        menu.choice 'Log a drink', 'Log a drink'
-        menu.choice 'See past history', 'See past history'
-        menu.choice 'Logout', 'Logout'
+        menu.choice 'Log a drink'
+        menu.choice 'Make a Cocktail'
+        menu.choice 'See past history'
+        menu.choice 'Logout'
     end
 
     result
@@ -57,5 +58,7 @@ def homescreen(current_user)
         current_user = welcome
     elsif next_step == 'Log a drink'
         log_a_drink_today_prompt(current_user)
+    elsif next_step == 'Make a Cocktail'
+        make_a_cocktail(current_user)
     end
 end
