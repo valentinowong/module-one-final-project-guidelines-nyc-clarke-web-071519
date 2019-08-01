@@ -94,7 +94,6 @@ def log_drink_on_any_date(current_user, date)
   prompt = TTY::Prompt.new
 
   puts "What drink did you have?"
-<<<<<<< HEAD
     user_input = prompt.collect do
         key(:name).ask('Drink name?', required: true)
         key(:description).ask('Description of drink')
@@ -105,17 +104,6 @@ def log_drink_on_any_date(current_user, date)
           q.messages[:valid?] = 'Please enter a valid time.'
       end
          
-=======
-  prompt = TTY::Prompt.new
-  user_input = prompt.collect do
-    key(:name).ask('Drink name?', required: true)
-    key(:description).ask('Description of drink')
-    key(:alcohol_percentage).ask('What is the alcohol percentage?')
-    key(:amount).ask('What is the amount (oz)', required: true)
-    key(:time).ask('What time did you have this drink? (HH:MM am/pm)') do |q| 
-      q.validate(/((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))/)
-      q.messages[:valid?] = 'Please enter a valid time.'
->>>>>>> make_drink2
     end
   end
     
