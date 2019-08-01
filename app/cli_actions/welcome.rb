@@ -10,7 +10,9 @@ end
 
     #prompt to ask user if they want to sign in or create account..string that is returned is used in "welcome_redirect"
     def welcome_message_prompt
-        welcome_message_input = @prompt.select("Please Sign In or Create New Account!", ["Sign In", "Create New Account","Close App"])
+        prompt = TTY::Prompt.new
+
+        welcome_message_input = prompt.select("Please Sign In or Create New Account!", ["Sign In", "Create New Account","Close App"])
         current_user = welcome_redirect(welcome_message_input)
     end
     
@@ -35,8 +37,10 @@ end
 
     #displays a prompt that returns a hash of user input
     def sign_up_prompt
+        prompt = TTY::Prompt.new
+
         puts "Tell us a little about yourself!"
-        @prompt.collect do
+        prompt.collect do
             key(:first_name).ask('What is your first name? (required)', required: true)
             key(:last_name).ask('What is your last name?')
             key(:email).ask('What is your email? (required)', required: true,) { |q| q.validate :email, 'Please enter a valid email address.' }
@@ -59,7 +63,8 @@ end
 
     #a prompt that asks a user to enter an email address, uses that user input in the next method
     def log_in_prompt
-        user_email = @prompt.ask('What is your email?') 
+        prompt = TTY::Prompt.new
+        user_email = prompt.ask('What is your email?') 
             # do |q| q.validate(/\A\w+@\w+\Z/, 'Invalid email address')
         log_in_prompt_result(user_email)
     end
@@ -67,11 +72,12 @@ end
     #an email validater that takes in the user input from previous method and checks if it matches a User in our database. If it does match we redirect to password.
     #if the email does not match one in our database a prompt is called that asks a user to try again or create new user.
     def log_in_prompt_result(user_email)
+        prompt = TTY::Prompt.new
         if User.find_by(email: user_email)
             user = User.find_by(email: user_email)
             password_prompt(user)
         else
-            user_choice = @prompt.select("Sorry! Email does not exist", ["Try again", "Sign up"])
+            user_choice = prompt.select("Sorry! Email does not exist", ["Try again", "Sign up"])
             if_no_email(user_choice)
         end
     end
@@ -88,16 +94,18 @@ end
 
     #a prompt asking for a user to input their password. Uses that input in next method.
     def password_prompt(user)
-        user_input = @prompt.mask('What is your password?')
+        prompt = TTY::Prompt.new
+        user_input = prompt.mask('What is your password?')
         password_validator(user_input,user)
     end
 
         
     def password_validator(password_attempt,user)
+        prompt = TTY::Prompt.new
         if user.password == password_attempt
             current_user = User.find_by(email: user.email)
         else
-            incorrect_password_user_input = @prompt.select("Sorry! wrong password! Would you like to try again?", ["Try again", "Sign up"])
+            incorrect_password_user_input = prompt.select("Sorry! wrong password! Would you like to try again?", ["Try again", "Sign up"])
             incorrect_password(incorrect_password_user_input,user)
         end
     end
@@ -110,5 +118,3 @@ end
         end
     end
 
-    #------------------log_in_prompt    run this to log in!------------------
-    #------------------create_new_user    run this to sign up!------------------

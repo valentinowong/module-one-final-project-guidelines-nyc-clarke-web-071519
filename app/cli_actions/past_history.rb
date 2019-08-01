@@ -5,7 +5,6 @@ def past_history_date_prompt(current_user)
     end
 
     choices << {name: "Select a different date", value: "Different Date"}
-
     prompt = TTY::Prompt.new
     user_input = prompt.select('Which day would you like to see?', choices)
 
@@ -46,14 +45,18 @@ def past_history_next_step_prompt
 end
 
 def past_history(current_user)
-    inputed_date = past_history_date_prompt(current_user)
-    display_past_history(current_user, inputed_date)
+    date = past_history_date_prompt(current_user)
+    past_history_display_and_next_steps(current_user,date)
+end
+
+def past_history_display_and_next_steps(current_user, date)
+    display_past_history(current_user, date)
     next_step = past_history_next_step_prompt
     if next_step == "See another date"
         past_history(current_user)
     elsif next_step == "Return to Today's Drinks"
         homescreen(current_user)
     elsif next_step == "Log a drink for this date"
-        log_drink_on_any_date(current_user, inputed_date)
+        log_a_drink_prompt_recent_days(current_user, date)
     end
 end
