@@ -95,33 +95,31 @@ def log_drink_on_any_date(current_user, date)
 
   puts "What drink did you have?"
     user_input = prompt.collect do
-        key(:name).ask('Drink name?', required: true)
-        key(:description).ask('Description of drink')
-        key(:alcohol_percentage).ask('What is the alcohol percentage?')
-        key(:amount).ask('What is the amount (oz)', required: true)
-        key(:time).ask('What time did you have this drink? (HH:MM am/pm)') do |q| 
-          q.validate(/((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))/)
-          q.messages[:valid?] = 'Please enter a valid time.'
+      key(:name).ask('Drink name?', required: true)
+      key(:description).ask('Description of drink')
+      key(:alcohol_percentage).ask('What is the alcohol percentage?')
+      key(:amount).ask('What is the amount (oz)', required: true)
+      key(:time).ask('What time did you have this drink? (HH:MM am/pm)') do |q| 
+        q.validate(/((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))/)
+        q.messages[:valid?] = 'Please enter a valid time.'
       end
          
     end
-  end
     
-    new_drink = Drink.create(
-      name: user_input[:name].capitalize,
-      description: user_input[:description],
-      alcohol_percentage: user_input[:alcohol_percentage]
-    )
+  new_drink = Drink.create(
+    name: user_input[:name].capitalize,
+    description: user_input[:description],
+    alcohol_percentage: user_input[:alcohol_percentage]
+  )
 
-    new_userdrink_with_new_drink = UserDrink.create(
-      datetime: Time.parse("#{date.strftime("%Y/%m/%d")} + #{user_input[:time]}"), 
-      amount: user_input[:amount],
-      drink_id: new_drink.id,
-      user_id: current_user.id
-    )
-    past_history(current_user)
+  new_userdrink_with_new_drink = UserDrink.create(
+    datetime: Time.parse("#{date.strftime("%Y/%m/%d")} + #{user_input[:time]}"), 
+    amount: user_input[:amount],
+    drink_id: new_drink.id,
+    user_id: current_user.id
+  )
+  past_history(current_user)
 end
-
 
 def log_recent_drink_any_date(current_user, userdrink, date)
   new_userdrink_with_recent_drink = UserDrink.create(
