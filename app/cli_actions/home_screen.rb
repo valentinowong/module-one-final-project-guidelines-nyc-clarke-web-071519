@@ -25,13 +25,24 @@ def display_date_time(datetime)
     datetime.strftime("%m/%d/%Y - %I:%M %p")
 end
 
+# Takes in a date and displays the drinks a user had on that drinking date
+def display_drinks_on_date(user, date)
+    users_drinks_on_date = user.drinks_on_date(date)
+    user.display_drinks(users_drinks_on_date)
+end
+
+# Shows the drinks a user had on the current drinking date
+def show_todays_drinks(user)
+    display_drinks_on_date(user, drinking_day(Time.now))
+end
+
 # **********************************
 
 def display_homescreen(current_user)
     puts `clear`
     puts "*************** ".blue + "Your Drinks Today" + " *******************".blue
     puts ""
-    current_user.show_todays_drinks
+    show_todays_drinks(current_user)
     puts ""
     puts "*****************************************************".blue
 end

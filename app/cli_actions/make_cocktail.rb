@@ -71,17 +71,35 @@ end
 # Given a specific cocktail info in hash format, displays that cocktails info in the console
 def display_cocktail_info(cocktail_info_hash)
     puts `clear`
-    puts "*************** ".blue + "#{cocktail_info_hash["strDrink"].capitalize}" + " *******************".blue
+    puts "*************** ".blue + "#{cocktail_info_hash["strDrink"].split.map(&:capitalize).join' '}" + " *******************".blue
     puts ""
     puts "INGREDIENTS:"
     puts ""
     (1..15).to_a.each do |n|
+<<<<<<< HEAD
         unless cocktail_info_hash["strMeasure#{n}"].chomp == "" && cocktail_info_hash["strIngredient#{n}"].chomp == ""
             puts "#{cocktail_info_hash["strMeasure#{n}"].chomp}#{cocktail_info_hash["strIngredient#{n}"]}".chomp.yellow
+=======
+        if !cocktail_info_hash["strMeasure#{n}"].nil?
+            if !cocktail_info_hash["strIngredient#{n}"].nil?
+                if !cocktail_info_hash["strMeasure#{n}"].chomp.strip.empty? || !cocktail_info_hash["strIngredient#{n}"].chomp.strip.empty?
+                    puts "#{cocktail_info_hash["strMeasure#{n}"].chomp.strip} #{cocktail_info_hash["strIngredient#{n}"].chomp.strip.split.map(&:capitalize).join' '}".yellow
+                end
+            else
+                if !cocktail_info_hash["strMeasure#{n}"].chomp.strip.empty?
+                    puts "#{cocktail_info_hash["strMeasure#{n}"].chomp.strip}".yellow
+                end
+            end
+        elsif !cocktail_info_hash["strIngredient#{n}"].nil?
+            if !cocktail_info_hash["strIngredient#{n}"].chomp.strip.empty?    
+                puts "#{cocktail_info_hash["strIngredient#{n}"].chomp.strip.split.map(&:capitalize).join' '}".yellow
+            end
+>>>>>>> 5798a81152ee7e327177dcb96bec6a76651ddc04
         end
     end
     puts ""
     puts "INSTRUCTIONS:"
+    puts ""
     puts "#{cocktail_info_hash["strInstructions"].chomp}".yellow
     puts ""
     puts "************************************************".blue
@@ -113,7 +131,3 @@ def make_a_cocktail(current_user)
         homescreen(current_user)
     end
 end
-
-
-# Max drinks returned = 110
-# Display 20s
