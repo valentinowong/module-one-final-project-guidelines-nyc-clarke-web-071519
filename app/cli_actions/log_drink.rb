@@ -2,7 +2,7 @@
 
 
 
-def log_a_drink_prompt(current_user)
+def log_a_drink_prompt_today(current_user)
 
   choices = []
 
@@ -24,7 +24,7 @@ def log_a_drink_prompt(current_user)
 end
 
 
-def log_new_drink(current_user)
+def log_new_drink_today(current_user)
   puts "What are you having?"
     user_input = @prompt.collect do
         key(:name).ask('Drink name?', required: true)
