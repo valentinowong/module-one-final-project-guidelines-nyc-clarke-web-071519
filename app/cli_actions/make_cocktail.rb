@@ -100,7 +100,23 @@ def display_cocktail_info(cocktail_info_hash)
     puts "************************************************".blue
 end
 
-def cocktail_next_steps
+# Prompts the user on what they want to do after making a cocktail
+def cocktail_next_steps_prompt(user, cocktail_info)
+
+    prompt = TTY::Prompt.new
+
+    result = prompt.select('What would you like to do now?') do |menu|
+        menu.choice "Log this drink!"
+        menu.choice "Make another cocktail!"
+        menu.choice "Return to Today's Drinks"
+    end
+
+    cocktail_next_steps_action(user, result, cocktail_info)
+
+end
+
+# Prompts the user on what they want to do after logging a cocktail
+def cocktail_next_steps_after_logging_prompt(user, cocktail_info)
 
     prompt = TTY::Prompt.new
 
@@ -109,8 +125,42 @@ def cocktail_next_steps
         menu.choice "Return to Today's Drinks"
     end
 
-    result
+    cocktail_next_steps_action(user, result, cocktail_info)
 
+end
+
+# Takes a user input from the next steps prompts and directs them to where they want to go
+def cocktail_next_steps_action(user, user_input, cocktail_info)
+    if user_input == "Make another cocktail!"
+        make_a_cocktail(user)
+    elsif user_input == "Return to Today's Drinks"
+        homescreen(user.reload)
+    elsif user_input == "Log this drink!"
+        log_cocktail(user, cocktail_info)
+        cocktail_next_steps_after_logging_prompt(user, cocktail_info)
+    end
+end
+
+# Takes in a user and a hash of info on a cocktail and logs the drink today at the current time for that user
+def log_cocktail(current_user, cocktail_info)
+    prompt = TTY::Prompt.new
+
+    user_input = prompt.ask("How much did you have? (oz.)") do |q|
+        q.required true
+        q.validate /^\+?(0|[1-9]\d*)$/
+    end
+
+    # Create the new drink object from the inputted info
+    new_drink = Drink.create(name: cocktail_info["strDrink"].split.map(&:capitalize).join(' '))
+
+    # Log the new userdrink at the current datetime
+    new_userdrink_with_new_drink = UserDrink.create(
+      datetime: Time.now,
+      amount: user_input,
+      drink_id: new_drink.id,
+      user_id: current_user.id
+    )
+    puts "We've logged your #{new_drink[:name]} for today!"
 end
 
 def make_a_cocktail(current_user)
@@ -119,10 +169,5 @@ def make_a_cocktail(current_user)
     cocktail = select_a_cocktail_prompt(cocktails)
     cocktail_info = get_cocktail_info_from_cocktail_db(cocktail)
     display_cocktail_info(cocktail_info)
-    next_step = cocktail_next_steps
-    if next_step == "Make another cocktail!"
-        make_a_cocktail(current_user)
-    elsif next_step == "Return to Today's Drinks"
-        homescreen(current_user)
-    end
+    cocktail_next_steps_prompt(current_user, cocktail_info)
 end

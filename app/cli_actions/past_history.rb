@@ -23,7 +23,10 @@ end
 # Displays the drinks a user had on a specific drinking date 
 def display_past_history(current_user, date)
     puts `clear`
-    puts "******** ".blue + "Your Drinks on #{date.strftime("%A, %d %B %Y")}" + " ********".blue
+    puts "************      ".blue + "Your Drinks From" + "      ************".blue
+    puts "************ ".blue + "#{date.strftime("%a, %d %b %Y")} - 8:00 AM" + " ************".blue
+    puts "************           ".blue + "until" + "            ************".blue
+    puts "************ ".blue + "#{(date+1).strftime("%a, %d %b %Y")} - 7:59 AM" + " ************".blue
     puts ""
     display_drinks_on_date(current_user, date)
     puts ""
