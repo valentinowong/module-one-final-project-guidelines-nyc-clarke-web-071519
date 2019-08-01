@@ -100,14 +100,10 @@ end
 
         
     def password_validator(password_attempt,user)
-        prompt = TTY::Prompt.new
         if user.password == password_attempt
             current_user = User.find_by(email: user.email)
         else
-<<<<<<< HEAD
-=======
             prompt = TTY::Prompt.new
->>>>>>> make_drink2
             incorrect_password_user_input = prompt.select("Sorry! wrong password! Would you like to try again?", ["Try again", "Sign up"])
             incorrect_password(incorrect_password_user_input,user)
         end
