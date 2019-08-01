@@ -76,8 +76,8 @@ def display_cocktail_info(cocktail_info_hash)
     puts "INGREDIENTS:"
     puts ""
     (1..15).to_a.each do |n|
-        unless cocktail_info_hash["strMeasure#{n}"].chomp == "" && cocktail_info_hash["strIngredient#{n}"] == ""
-            puts "#{cocktail_info_hash["strMeasure#{n}"].chomp}#{cocktail_info_hash["strIngredient#{n}"]}".yellow
+        unless cocktail_info_hash["strMeasure#{n}"].chomp == "" && cocktail_info_hash["strIngredient#{n}"].chomp == ""
+            puts "#{cocktail_info_hash["strMeasure#{n}"].chomp}#{cocktail_info_hash["strIngredient#{n}"]}".chomp.yellow
         end
     end
     puts ""
