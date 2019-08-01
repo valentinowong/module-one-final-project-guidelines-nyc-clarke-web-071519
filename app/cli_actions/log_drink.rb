@@ -49,7 +49,7 @@ def log_new_drink_today(current_user)
     drink_id: new_drink.id,
     user_id: current_user.id
   )
-  homescreen(current_user)
+  homescreen(current_user.reload)
 end
 
 # Logs a new userdrink using the info from a recent drink the user has had
@@ -60,7 +60,7 @@ def log_recent_drink_today(current_user, userdrink)
       drink_id: userdrink.drink_id,
       user_id: current_user.id
     )  
-    homescreen(current_user)
+    homescreen(current_user.reload)
 end
 
 # Prompts the user to manually enter info to log a new userdrink on a specific date
@@ -118,7 +118,7 @@ def log_drink_on_any_date(current_user, date)
     drink_id: new_drink.id,
     user_id: current_user.id
   )
-  past_history(current_user)
+  past_history(current_user.reload)
 end
 
 def log_recent_drink_any_date(current_user, userdrink, date)
@@ -128,5 +128,5 @@ def log_recent_drink_any_date(current_user, userdrink, date)
     drink_id: userdrink.drink_id,
     user_id: current_user.id
   )  
-  past_history(current_user)
+  past_history(current_user.reload)
 end

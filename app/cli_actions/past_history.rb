@@ -25,7 +25,7 @@ def display_past_history(current_user, date)
     puts `clear`
     puts "******** ".blue + "Your Drinks on #{date.strftime("%A, %d %B %Y")}" + " ********".blue
     puts ""
-    current_user.display_drinks_on_date(date)
+    display_drinks_on_date(current_user, date)
     puts ""
     puts "*****************************************************".blue
 end
