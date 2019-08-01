@@ -48,11 +48,12 @@ class User < ActiveRecord::Base
 
     # Returns an array of all the drinking dates that a specific user has had a drink
     def drinking_days
-        user_drinks.map {|userdrink| drinking_day(userdrink.datetime)}.uniq
+        days = user_drinks.map {|userdrink| drinking_day(userdrink.datetime)}.uniq
+        days.sort.reverse
     end
 
     def last_5_drinking_days
-        drinking_days.last(5)
+        drinking_days.first(5)
     end
 
 end
