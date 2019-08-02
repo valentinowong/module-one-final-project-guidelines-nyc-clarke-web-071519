@@ -46,6 +46,18 @@ class User < ActiveRecord::Base
         array
     end
 
+    def five_most_recently_logged_drinks
+        array = []
+        self.user_drinks.reverse.each do |userdrink|
+            if array.length < 5 
+                unless array.find {|recent_drink| recent_drink.drink_id == userdrink.drink_id && recent_drink.amount == userdrink.amount}
+                    array << userdrink
+                end
+            end
+        end
+        array
+    end
+
     # Returns an array of all the drinking dates that a specific user has had a drink
     def drinking_days
         days = user_drinks.map {|userdrink| drinking_day(userdrink.datetime)}.uniq

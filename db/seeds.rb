@@ -1,7 +1,35 @@
 require_relative '../config/environment'
 
+User.create(first_name: "Valentino", last_name: "Wong", email: "valentino.wong@gmail.com", weight: 160, birthdate: "1988-06-24", gender: "Male", password: "password")
+User.create(first_name: "AJ", last_name: "Marchitelli", email: "amarchitelli1993@gmail.com", weight: 180, birthdate: "1993-06-18", gender: "Male", password: "password")
+User.create(first_name: "Taris", last_name: "Mullins", email: "taris.mullins@flatironschool.com", gender: "Male", password: "password")
+User.create(first_name: "Tony", last_name: "Lam", email: "supui.lam@flatironschool.com", gender: "Male", password: "password")
+User.create(first_name: "Greg",last_name: "Dwyer",email: "greg.dwyer@flatironschool.com",gender: "Male",password: "password")
+User.create(first_name: "Sebastian",last_name: "Karolkiewicz",email: "sebastian.karolkiewicz@flatironschool.com",gender: "Male",password: "password")
+User.create(first_name: "Jason",last_name: "Shockness",email: "jshock12@gmail.com",gender: "Male",password: "password")
+User.create(first_name: "Andrew",last_name: "Tack",email: "andrew.tack.recapllc@gmail.com",gender: "Male",password: "password")
+User.create(first_name: "Alyssa",last_name: "Farina",email: "alyssafarina695@gmail.com",gender: "Female",password: "password")
+User.create(first_name: "Meghann",last_name: "Walsh",email: "meghann.mccool.walsh@gmail.com",gender: "Female",password: "password")
+User.create(first_name: "Hyo",last_name: "Lee",email: "hyoeun93@gmail.com",gender: "Female",password: "password")
 
+Drink.create(name: "Bud Light", description: "Light Beer", alcohol_percentage: 4.2)
+Drink.create(name: "Coors Light", description: "Light Beer", alcohol_percentage: 4.2)
+Drink.create(name: "Chardonnay", description: "White Wine", alcohol_percentage: 12)
+Drink.create(name: "Merlot", description: "Red Wine", alcohol_percentage: 12)
+Drink.create(name: "Pinot Noir", description: "Red Wine", alcohol_percentage: 12)
+Drink.create(name: "Sake", description: "Rice Wine", alcohol_percentage: 20)
+Drink.create(name: "Soju", description: "Rice Wine", alcohol_percentage: 20)
+Drink.create(name: "Johnny Walker Black Label", description: "Smoky and smooth", alcohol_percentage: 40)
 
-# aj_beer = UserDrink.create(datetime: Time.now, amount: 10, drink_id: 2, user_id: 38)
-
-binding.pry
+UserDrink.create(datetime: "2019-07-26 11:00 PM", amount: 2, drink_id: Drink.find_by(name: "Soju").id, user_id: User.find_by(email: "valentino.wong@gmail.com").id)
+UserDrink.create(datetime: "2019-07-26 11:10 PM", amount: 2, drink_id: Drink.find_by(name: "Soju").id, user_id: User.find_by(email: "valentino.wong@gmail.com").id)
+UserDrink.create(datetime: "2019-07-26 11:20 PM", amount: 2, drink_id: Drink.find_by(name: "Soju").id, user_id: User.find_by(email: "valentino.wong@gmail.com").id)
+UserDrink.create(datetime: "2019-07-26 11:30 PM", amount: 2, drink_id: Drink.find_by(name: "Soju").id, user_id: User.find_by(email: "valentino.wong@gmail.com").id)
+UserDrink.create(datetime: "2019-07-26 11:40 PM", amount: 2, drink_id: Drink.find_by(name: "Soju").id, user_id: User.find_by(email: "valentino.wong@gmail.com").id)
+UserDrink.create(datetime: "2019-07-26 11:50 PM", amount: 2, drink_id: Drink.find_by(name: "Soju").id, user_id: User.find_by(email: "valentino.wong@gmail.com").id)
+UserDrink.create(datetime: "2019-07-27 12:00 AM", amount: 2, drink_id: Drink.find_by(name: "Soju").id, user_id: User.find_by(email: "valentino.wong@gmail.com").id)
+UserDrink.create(datetime: "2019-07-27 4:30 AM", amount: 12, drink_id: Drink.find_by(name: "Bud Light").id, user_id: User.find_by(email: "valentino.wong@gmail.com").id)
+UserDrink.create(datetime: "2019-07-27 4:45 AM", amount: 12, drink_id: Drink.find_by(name: "Bud Light").id, user_id: User.find_by(email: "valentino.wong@gmail.com").id)
+UserDrink.create(datetime: "2019-07-27 5:00 AM", amount: 12, drink_id: Drink.find_by(name: "Bud Light").id, user_id: User.find_by(email: "valentino.wong@gmail.com").id)
+UserDrink.create(datetime: "2019-07-27 6:00 AM", amount: 2, drink_id: Drink.find_by(name: "Johnny Walker Black Label").id, user_id: User.find_by(email: "valentino.wong@gmail.com").id)
+UserDrink.create(datetime: "2019-07-27 6:15 AM", amount: 2, drink_id: Drink.find_by(name: "Johnny Walker Black Label").id, user_id: User.find_by(email: "valentino.wong@gmail.com").id)

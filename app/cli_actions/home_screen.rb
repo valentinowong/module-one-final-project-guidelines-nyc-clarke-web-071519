@@ -53,6 +53,7 @@ def homescreen_next_step_prompt
     result = prompt.select('What would you like to do?') do |menu|
         menu.choice 'Log a drink'
         menu.choice 'Make a cocktail'
+        menu.choice "See previous day"
         menu.choice 'See past history'
         menu.choice 'Logout'
     end
@@ -71,5 +72,7 @@ def homescreen(current_user)
         log_a_drink_today_prompt(current_user)
     elsif next_step == 'Make a cocktail'
         make_a_cocktail(current_user)
+    elsif next_step == "See previous day"
+        past_history_display_and_next_steps(current_user,Date.today - 1)
     end
 end

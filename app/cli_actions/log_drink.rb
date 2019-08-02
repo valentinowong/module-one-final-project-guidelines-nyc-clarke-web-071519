@@ -37,7 +37,7 @@ def log_new_drink_today(current_user)
     
   # Create the new drink object from the inputted info
   new_drink = Drink.create(
-    name: user_input[:name].capitalize,
+    name: user_input[:name].split.map(&:capitalize).join(' '),
     description: user_input[:description],
     alcohol_percentage: user_input[:alcohol_percentage]
   )
@@ -70,7 +70,7 @@ def log_a_drink_prompt_recent_days(current_user, date)
 
   choices = []
 
-  current_user.user_drinks.last(5).reverse.each do |userdrink|
+  current_user.five_most_recently_logged_drinks.each do |userdrink|
     choices << {name: "#{userdrink.amount} oz. - #{Drink.find(userdrink.drink_id).name}", value: userdrink}
     end
     

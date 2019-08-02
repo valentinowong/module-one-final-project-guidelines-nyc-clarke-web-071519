@@ -1,6 +1,6 @@
 def welcome
     puts `clear`
-    puts "Welcome to Drink Logger 5000!".blue.bold
+    puts "Welcome to Drunk History!".blue.bold
     puts ""
     welcome_message_prompt
 end
