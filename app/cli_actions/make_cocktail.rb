@@ -71,7 +71,7 @@ end
 # Given a specific cocktail info in hash format, displays that cocktails info in the console
 def display_cocktail_info(cocktail_info_hash)
     puts `clear`
-    puts "*************** ".blue + "#{cocktail_info_hash["strDrink"].split.map(&:capitalize).join' '}" + " *******************".blue
+    puts "*************** ".blue + "#{cocktail_info_hash["strDrink"].split.map(&:capitalize).join(' ')}" + " *******************".blue
     puts ""
     puts "INGREDIENTS:"
     puts ""
@@ -79,7 +79,7 @@ def display_cocktail_info(cocktail_info_hash)
         if !cocktail_info_hash["strMeasure#{n}"].nil?
             if !cocktail_info_hash["strIngredient#{n}"].nil?
                 if !cocktail_info_hash["strMeasure#{n}"].chomp.strip.empty? || !cocktail_info_hash["strIngredient#{n}"].chomp.strip.empty?
-                    puts "#{cocktail_info_hash["strMeasure#{n}"].chomp.strip} #{cocktail_info_hash["strIngredient#{n}"].chomp.strip.split.map(&:capitalize).join' '}".yellow
+                    puts "#{cocktail_info_hash["strMeasure#{n}"].chomp.strip} #{cocktail_info_hash["strIngredient#{n}"].chomp.strip.split.map(&:capitalize).join(' ')}".yellow
                 end
             else
                 if !cocktail_info_hash["strMeasure#{n}"].chomp.strip.empty?
@@ -88,7 +88,7 @@ def display_cocktail_info(cocktail_info_hash)
             end
         elsif !cocktail_info_hash["strIngredient#{n}"].nil?
             if !cocktail_info_hash["strIngredient#{n}"].chomp.strip.empty?    
-                puts "#{cocktail_info_hash["strIngredient#{n}"].chomp.strip.split.map(&:capitalize).join' '}".yellow
+                puts "#{cocktail_info_hash["strIngredient#{n}"].chomp.strip.split.map(&:capitalize).join(' ')}".yellow
             end
         end
     end
@@ -106,8 +106,8 @@ def cocktail_next_steps_prompt(user, cocktail_info)
     prompt = TTY::Prompt.new
 
     result = prompt.select('What would you like to do now?') do |menu|
-        menu.choice "Log this drink!"
-        menu.choice "Make another cocktail!"
+        menu.choice "Log this drink"
+        menu.choice "Make another cocktail"
         menu.choice "Return to Today's Drinks"
     end
 
@@ -121,7 +121,7 @@ def cocktail_next_steps_after_logging_prompt(user, cocktail_info)
     prompt = TTY::Prompt.new
 
     result = prompt.select('What would you like to do now?') do |menu|
-        menu.choice "Make another cocktail!"
+        menu.choice "Make another cocktail"
         menu.choice "Return to Today's Drinks"
     end
 
@@ -131,11 +131,11 @@ end
 
 # Takes a user input from the next steps prompts and directs them to where they want to go
 def cocktail_next_steps_action(user, user_input, cocktail_info)
-    if user_input == "Make another cocktail!"
+    if user_input == "Make another cocktail"
         make_a_cocktail(user)
     elsif user_input == "Return to Today's Drinks"
         homescreen(user.reload)
-    elsif user_input == "Log this drink!"
+    elsif user_input == "Log this drink"
         log_cocktail(user, cocktail_info)
         cocktail_next_steps_after_logging_prompt(user, cocktail_info)
     end

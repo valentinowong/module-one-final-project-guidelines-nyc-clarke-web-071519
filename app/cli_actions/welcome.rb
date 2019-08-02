@@ -1,6 +1,6 @@
 def welcome
     puts `clear`
-    puts "Welcome to Drink Logger 5000!".blue
+    puts "Welcome to Drink Logger 5000!".blue.bold
     puts ""
     welcome_message_prompt
 end
@@ -25,7 +25,7 @@ end
             homescreen(current_user)
         elsif welcome_input == "Close App"
             puts `clear`
-            puts '     "24 hours in a day. 24 beers in a case. Coincidence? I think not." - H.L. Mencken'.yellow
+            puts '     "24 hours in a day. 24 beers in a case. Coincidence? I think not." - H.L. Mencken'.yellow.bold
             puts ""
             puts "     🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺 🍺"
             puts ""
@@ -45,7 +45,7 @@ end
             key(:email).ask('What is your email? (required)', required: true,) { |q| q.validate :email, 'Please enter a valid email address.' }
             key(:weight).ask('What is your weight? (lbs)')
             key(:birthdate).ask('What is your birthdate? (YYYY-MM-DD)') do |q| 
-                q.validate(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)
+                q.validate(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$)/)
                 q.messages[:valid?] = 'Please enter a valid date.'
             end
             key(:gender).select("What is your gender?",['Male','Female','Other'])
@@ -76,7 +76,7 @@ end
             password_prompt(user)
         else
             prompt = TTY::Prompt.new
-            user_choice = prompt.select("Sorry! Email does not exist", ["Try again", "Sign up"])
+            user_choice = prompt.select("Sorry! That email does not exist.", ["Try again", "Sign up"])
             if_no_email(user_choice)
         end
     end
@@ -104,7 +104,7 @@ end
             current_user = User.find_by(email: user.email)
         else
             prompt = TTY::Prompt.new
-            incorrect_password_user_input = prompt.select("Sorry! wrong password! Would you like to try again?", ["Try again", "Sign up"])
+            incorrect_password_user_input = prompt.select("Sorry! Wrong password! Would you like to try again?", ["Try again", "Sign up"])
             incorrect_password(incorrect_password_user_input,user)
         end
     end
